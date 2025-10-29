@@ -1,0 +1,50 @@
+@prefix : <http://www.w3.org/2006/vcard/ns#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Классы
+:Person rdf:type owl:Class .
+:Department rdf:type owl:Class .
+:Company rdf:type owl:Class .
+
+# Отношения
+:worksIn rdf:type owl:ObjectProperty ;
+    rdfs:domain :Person ;
+    rdfs:range :Department .
+
+:belongsTo rdf:type owl:ObjectProperty ;
+    rdfs:domain :Department ;
+    rdfs:range :Company .
+
+# Сущности
+:company1 rdf:type :Company ;
+    rdfs:label "TechNova Inc." .
+
+:dept1 rdf:type :Department ;
+    rdfs:label "Research and Development" ;
+    :belongsTo :company1 .
+
+:dept2 rdf:type :Department ;
+    rdfs:label "Human Resources" ;
+    :belongsTo :company1 .
+
+:hieu rdf:type :Person ;
+    :fn "Hieu Pham" ;
+    :email <mailto:hieu@technova.com> ;
+    :worksIn :dept1 .
+
+:ngu rdf:type :Person ;
+    :fn "Ngu Giang" ;
+    :email <mailto:ngu@technova.com> ;
+    :worksIn :dept1 .
+
+:ngoc rdf:type :Person ;
+    :fn "Ngoc Le" ;
+    :email <mailto:ngoc@technova.com> ;
+    :worksIn :dept2 .
+
+:huy rdf:type :Person ;
+    :fn "Huy Nguyen" ;
+    :email <mailto:huy@technova.com> ;
+    :worksIn :dept2 .
