@@ -4,45 +4,52 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-### ОНТОЛОГИЯ ###
 :family_ontology rdf:type owl:Ontology ;
-    rdfs:label "Family Ontology" .
+    rdfs:label "Family Ontology"@en .
 
-### КЛАСС ###
+### Classes
 :Человек rdf:type owl:Class ;
-    rdfs:label "Person" .
+    rdfs:label "Person"@en .
 
-### СВОЙСТВА ###
-:ИмеетРодителя rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
-    rdfs:label "hasParent" ;
+### Object properties
+
+# hasParent:
+:ИмеетРодителя rdf:type owl:ObjectProperty ;
+    rdfs:label "hasParent"@en ;
     rdfs:domain :Человек ;
     rdfs:range :Человек ;
-    owl:propertyDisjointWith :ИмеетРодителя .
+    rdfs:subPropertyOf :ИмеетПредка .
 
-:ИмеетПредка rdf:type owl:ObjectProperty ;
-    rdfs:label "hasAncestor" ;
-    owl:propertyChainAxiom ( :ИмеетРодителя :ИмеетПредка ) .
+# hasAncestor:
+:ИмеетПредка rdf:type owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "hasAncestor"@en ;
+    rdfs:domain :Человек ;
+    rdfs:range :Человек .
 
-:ИмеетПотомка rdf:type owl:ObjectProperty ;
-    rdfs:label "hasDescendant" ;
-    owl:propertyChainAxiom ( :ИмеетПотомка :ИмеетРодителя ) .
+# hasDescendant:
+:ИмеетПотомка rdf:type owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "hasDescendant"@en ;
+    rdfs:domain :Человек ;
+    rdfs:range :Человек ;
+    owl:inverseOf :ИмеетПредка .
 
-### СУЩНОСТИ ###
+### Individuals
+
 :Человек1 rdf:type :Человек ;
-    rdfs:label "Person1" .
+    rdfs:label "Person1"@en .
 
 :Человек2 rdf:type :Человек ;
-    rdfs:label "Person2" ;
+    rdfs:label "Person2"@en ;
     :ИмеетРодителя :Человек1 .
 
 :Человек3 rdf:type :Человек ;
-    rdfs:label "Person3" ;
+    rdfs:label "Person3"@en ;
     :ИмеетРодителя :Человек2 .
 
 :Человек4 rdf:type :Человек ;
-    rdfs:label "Person4" ;
+    rdfs:label "Person4"@en ;
     :ИмеетРодителя :Человек3 .
 
 :Человек5 rdf:type :Человек ;
-    rdfs:label "Person5" ;
+    rdfs:label "Person5"@en ;
     :ИмеетРодителя :Человек4 .
