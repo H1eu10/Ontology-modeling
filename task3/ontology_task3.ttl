@@ -1,1 +1,89 @@
+@prefix : <http://kik.misis.ru/ontology/mpi/2024/Mishurov-Sergey/task3/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://kik.misis.ru/ontology/mpi/2024/Mishurov-Sergey/task3/> .
 
+:OntologyTask3 rdf:type owl:Ontology ;
+               rdfs:label "Educational Resources and Requests Ontology" ;
+               rdfs:comment "Ontology for classifying valid educational requests" .
+
+### Domain Classes
+:Student rdf:type owl:Class ;
+         rdfs:label "Student" ;
+         rdfs:comment "Learner in an educational institution".
+
+:Teacher rdf:type owl:Class ;
+         rdfs:label "Teacher" ;
+         rdfs:comment "Teacher in an educational institution".
+
+:EducationalProgram rdf:type owl:Class ;
+                    rdfs:label "Educational program" ;
+                    rdfs:comment "Study program or course".
+
+:Subject rdf:type owl:Class ;
+         rdfs:label "Subject" ;
+         rdfs:comment "Academic discipline".
+
+:ElectronicEducationalResource rdf:type owl:Class ;
+                              rdfs:label "Electronic educational resource" ;
+                              rdfs:comment "Digital resource for learning".
+
+:ResourceRequest rdf:type owl:Class ;
+                 rdfs:label "Resource request" ;
+                 rdfs:comment "Request for access to educational resource".
+
+:ValidRequest rdf:type owl:Class ;
+              rdfs:label "Valid request" ;
+              rdfs:comment "Correct and permitted resource request".
+
+### Properties
+:studies_in_program rdf:type owl:ObjectProperty ;
+                    rdfs:label "studies in program" ;
+                    rdfs:domain :Student ;
+                    rdfs:range :EducationalProgram .
+
+:has_author rdf:type owl:ObjectProperty ;
+            rdfs:label "has author" ;
+            rdfs:domain :ResourceRequest ;
+            rdfs:range :Student .
+
+:requests_access_to rdf:type owl:ObjectProperty ;
+                    rdfs:label "requests access to" ;
+                    rdfs:domain :ResourceRequest ;
+                    rdfs:range :ElectronicEducationalResource .
+
+:includes rdf:type owl:ObjectProperty ;
+          rdfs:label "includes" ;
+          rdfs:domain :EducationalProgram ;
+          rdfs:range :ElectronicEducationalResource .
+
+:studies_subject rdf:type owl:ObjectProperty ;
+                 rdfs:label "studies subject" ;
+                 rdfs:domain :EducationalProgram ;
+                 rdfs:range :Subject .
+
+### Individuals (example data)
+:Student1 rdf:type :Student ;
+          rdfs:label "Ivanov Petr" .
+
+:Program1 rdf:type :EducationalProgram ;
+          rdfs:label "Computer Science Program" .
+
+:Subject1 rdf:type :Subject ;
+          rdfs:label "Mathematics" .
+
+:Resource1 rdf:type :ElectronicEducationalResource ;
+           rdfs:label "Electronic Mathematics Textbook" .
+
+:Request1 rdf:type :ResourceRequest ;
+          rdfs:label "Student Ivanov's request" .
+
+### Relationships between individuals
+:Student1 :studies_in_program :Program1 .
+:Request1 :has_author :Student1 .
+:Request1 :requests_access_to :Resource1 .
+:Program1 :includes :Resource1 .
+:Program1 :studies_subject :Subject1 .
