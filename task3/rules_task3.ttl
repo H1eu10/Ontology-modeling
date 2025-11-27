@@ -1,4 +1,4 @@
-@prefix : <http://kik.misis.ru/ontology/mpi/2024/Mishurov-Sergey/task3/> .
+@prefix : <http://kik.misis.ru/ontology/mpi/2024/Pham-Minh-Hieu/task3/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -7,7 +7,7 @@
 @prefix swrl: <http://www.w3.org/2003/11/swrl#> .
 @prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
 @prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
-@base <http://kik.misis.ru/ontology/mpi/2024/Mishurov-Sergey/task3/> .
+@base <http://kik.misis.ru/ontology/mpi/2024/Pham-Minh-Hieu/task3/> .
 
 ### Variables for SWRL rule
 :var_x rdf:type swrl:Variable .
