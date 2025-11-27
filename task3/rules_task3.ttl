@@ -1,1 +1,121 @@
+@prefix : <http://kik.misis.ru/ontology/mpi/2024/Mishurov-Sergey/task3/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@base <http://kik.misis.ru/ontology/mpi/2024/Mishurov-Sergey/task3/> .
 
+### Variables for SWRL rule
+:var_x rdf:type swrl:Variable .
+:var_A rdf:type swrl:Variable .
+:var_B rdf:type swrl:Variable .
+:var_C rdf:type swrl:Variable .
+:var_D rdf:type swrl:Variable .
+
+### SWRL rule for classifying valid requests
+[ rdf:type swrl:Imp ;
+  rdfs:label "Educational request validation rule" ;
+  rdfs:comment "A request is considered valid if a student requests access to a resource that is included in their educational program and related to the studied subject" ;
+  swrla:isRuleEnabled "true"^^xsd:boolean ;
+  
+  swrl:body [
+    rdf:type swrl:AtomList ;
+    rdf:first [
+      rdf:type swrl:ClassAtom ;
+      swrl:classPredicate :Subject ;
+      swrl:argument1 :var_C
+    ] ;
+    rdf:rest [
+      rdf:type swrl:AtomList ;
+      rdf:first [
+        rdf:type swrl:ClassAtom ;
+        swrl:classPredicate :ResourceRequest ;
+        swrl:argument1 :var_x
+      ] ;
+      rdf:rest [
+        rdf:type swrl:AtomList ;
+        rdf:first [
+          rdf:type swrl:ClassAtom ;
+          swrl:classPredicate :EducationalProgram ;
+          swrl:argument1 :var_B
+        ] ;
+        rdf:rest [
+          rdf:type swrl:AtomList ;
+          rdf:first [
+            rdf:type swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate :requests_access_to ;
+            swrl:argument1 :var_x ;
+            swrl:argument2 :var_D
+          ] ;
+          rdf:rest [
+            rdf:type swrl:AtomList ;
+            rdf:first [
+              rdf:type swrl:IndividualPropertyAtom ;
+              swrl:propertyPredicate :has_author ;
+              swrl:argument1 :var_x ;
+              swrl:argument2 :var_A
+            ] ;
+            rdf:rest [
+              rdf:type swrl:AtomList ;
+              rdf:first [
+                rdf:type swrl:ClassAtom ;
+                swrl:classPredicate :ElectronicEducationalResource ;
+                swrl:argument1 :var_D
+              ] ;
+              rdf:rest [
+                rdf:type swrl:AtomList ;
+                rdf:first [
+                  rdf:type swrl:ClassAtom ;
+                  swrl:classPredicate :Student ;
+                  swrl:argument1 :var_A
+                ] ;
+                rdf:rest [
+                  rdf:type swrl:AtomList ;
+                  rdf:first [
+                    rdf:type swrl:IndividualPropertyAtom ;
+                    swrl:propertyPredicate :studies_in_program ;
+                    swrl:argument1 :var_A ;
+                    swrl:argument2 :var_B
+                  ] ;
+                  rdf:rest [
+                    rdf:type swrl:AtomList ;
+                    rdf:first [
+                      rdf:type swrl:IndividualPropertyAtom ;
+                      swrl:propertyPredicate :includes ;
+                      swrl:argument1 :var_B ;
+                      swrl:argument2 :var_D
+                    ] ;
+                    rdf:rest [
+                      rdf:type swrl:AtomList ;
+                      rdf:first [
+                        rdf:type swrl:IndividualPropertyAtom ;
+                        swrl:propertyPredicate :studies_subject ;
+                        swrl:argument1 :var_B ;
+                        swrl:argument2 :var_C
+                      ] ;
+                      rdf:rest rdf:nil
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ] ;
+  
+  swrl:head [
+    rdf:type swrl:AtomList ;
+    rdf:first [
+      rdf:type swrl:ClassAtom ;
+      swrl:classPredicate :ValidRequest ;
+      swrl:argument1 :var_x
+    ] ;
+    rdf:rest rdf:nil
+  ]
+] .
