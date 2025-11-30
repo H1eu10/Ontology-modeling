@@ -1,121 +1,174 @@
-@prefix : <http://kik.misis.ru/ontology/mpi/2024/Pham-Minh-Hieu/task3/> .
+@prefix : <http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
-@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
-@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
-@base <http://kik.misis.ru/ontology/mpi/2024/Pham-Minh-Hieu/task3/> .
+@base <http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/> .
 
-### Variables for SWRL rule
-:var_x rdf:type swrl:Variable .
-:var_A rdf:type swrl:Variable .
-:var_B rdf:type swrl:Variable .
-:var_C rdf:type swrl:Variable .
-:var_D rdf:type swrl:Variable .
+<http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3> rdf:type owl:Ontology .
 
-### SWRL rule for classifying valid requests
-[ rdf:type swrl:Imp ;
-  rdfs:label "Educational request validation rule" ;
-  rdfs:comment "A request is considered valid if a student requests access to a resource that is included in their educational program and related to the studied subject" ;
-  swrla:isRuleEnabled "true"^^xsd:boolean ;
-  
-  swrl:body [
-    rdf:type swrl:AtomList ;
-    rdf:first [
-      rdf:type swrl:ClassAtom ;
-      swrl:classPredicate :Subject ;
-      swrl:argument1 :var_C
-    ] ;
-    rdf:rest [
-      rdf:type swrl:AtomList ;
-      rdf:first [
-        rdf:type swrl:ClassAtom ;
-        swrl:classPredicate :ResourceRequest ;
-        swrl:argument1 :var_x
-      ] ;
-      rdf:rest [
-        rdf:type swrl:AtomList ;
-        rdf:first [
-          rdf:type swrl:ClassAtom ;
-          swrl:classPredicate :EducationalProgram ;
-          swrl:argument1 :var_B
-        ] ;
-        rdf:rest [
-          rdf:type swrl:AtomList ;
-          rdf:first [
-            rdf:type swrl:IndividualPropertyAtom ;
-            swrl:propertyPredicate :requests_access_to ;
-            swrl:argument1 :var_x ;
-            swrl:argument2 :var_D
-          ] ;
-          rdf:rest [
-            rdf:type swrl:AtomList ;
-            rdf:first [
-              rdf:type swrl:IndividualPropertyAtom ;
-              swrl:propertyPredicate :has_author ;
-              swrl:argument1 :var_x ;
-              swrl:argument2 :var_A
-            ] ;
-            rdf:rest [
-              rdf:type swrl:AtomList ;
-              rdf:first [
-                rdf:type swrl:ClassAtom ;
-                swrl:classPredicate :ElectronicEducationalResource ;
-                swrl:argument1 :var_D
-              ] ;
-              rdf:rest [
-                rdf:type swrl:AtomList ;
-                rdf:first [
-                  rdf:type swrl:ClassAtom ;
-                  swrl:classPredicate :Student ;
-                  swrl:argument1 :var_A
-                ] ;
-                rdf:rest [
-                  rdf:type swrl:AtomList ;
-                  rdf:first [
-                    rdf:type swrl:IndividualPropertyAtom ;
-                    swrl:propertyPredicate :studies_in_program ;
-                    swrl:argument1 :var_A ;
-                    swrl:argument2 :var_B
-                  ] ;
-                  rdf:rest [
-                    rdf:type swrl:AtomList ;
-                    rdf:first [
-                      rdf:type swrl:IndividualPropertyAtom ;
-                      swrl:propertyPredicate :includes ;
-                      swrl:argument1 :var_B ;
-                      swrl:argument2 :var_D
-                    ] ;
-                    rdf:rest [
-                      rdf:type swrl:AtomList ;
-                      rdf:first [
-                        rdf:type swrl:IndividualPropertyAtom ;
-                        swrl:propertyPredicate :studies_subject ;
-                        swrl:argument1 :var_B ;
-                        swrl:argument2 :var_C
-                      ] ;
-                      rdf:rest rdf:nil
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  ] ;
-  
-  swrl:head [
-    rdf:type swrl:AtomList ;
-    rdf:first [
-      rdf:type swrl:ClassAtom ;
-      swrl:classPredicate :ValidRequest ;
-      swrl:argument1 :var_x
-    ] ;
-    rdf:rest rdf:nil
-  ]
-] .
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/includes
+:includes rdf:type owl:ObjectProperty ,
+                   owl:TransitiveProperty .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/has_employee
+:has_employee rdf:type owl:ObjectProperty .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/accesses_resource
+:accesses_resource rdf:type owl:ObjectProperty .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/works_on_project
+:works_on_project rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/ValidAccess
+:ValidAccess rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/GameProject
+:GameProject rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/ResourceAccess
+:ResourceAccess rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/Department
+:Department rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/Employee
+:Employee rdf:type owl:Class .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/GameResource
+:GameResource rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/John_Doe
+:John_Doe rdf:type owl:NamedIndividual ,
+                   :Employee ;
+          :works_on_project :Mobile_RPG_Game .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/ImageLibrary
+:ImageLibrary rdf:type owl:NamedIndividual ,
+                       :GameResource .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/Mobile_RPG_Game
+:Mobile_RPG_Game rdf:type owl:NamedIndividual ,
+                          :GameProject ;
+                 :includes :DesignDepartment .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/DesignDepartment
+:DesignDepartment rdf:type owl:NamedIndividual ,
+                           :Department ;
+                  :includes :ImageLibrary .
+
+###  http://kik.misis.ru/ontology/mpi/2024/Фам-Минь-Хиеу/task3/access_1
+:access_1 rdf:type owl:NamedIndividual ,
+                   :ResourceAccess ;
+          :has_employee :John_Doe ;
+          :accesses_resource :ImageLibrary .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+<http://kik.misis.ru/ontology/mpi/2024/example-1/C> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://kik.misis.ru/ontology/mpi/2024/example-1/x> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://kik.misis.ru/ontology/mpi/2024/example-1/B> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://kik.misis.ru/ontology/mpi/2024/example-1/D> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://kik.misis.ru/ontology/mpi/2024/example-1/A> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "Rule to determine valid access: Employees can only access resources belonging to projects they work on" ;
+   rdfs:label "Access_Validation_Rule" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Department ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/C>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :ResourceAccess ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/x>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :GameProject ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/B>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :accesses_resource ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/x> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <http://kik.misis.ru/ontology/mpi/2024/example-1/D>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :has_employee ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/x> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <http://kik.misis.ru/ontology/mpi/2024/example-1/A>
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#classPredicate> :GameResource ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/D>
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> :Employee ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/A>
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :works_on_project ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/A> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> <http://kik.misis.ru/ontology/mpi/2024/example-1/B>
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :includes ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/B> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> <http://kik.misis.ru/ontology/mpi/2024/example-1/D>
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest rdf:nil
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :ValidAccess ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://kik.misis.ru/ontology/mpi/2024/example-1/x>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
