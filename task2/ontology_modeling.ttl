@@ -21,26 +21,26 @@
 #################################################################
 
 ###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/ИмеетРодителя
-:ИмеетРодителя rdf:type owl:ObjectProperty ;
-               owl:inverseOf :ЯвляетсяРодителемДля ;
-               rdf:type owl:FunctionalProperty ,
-                        owl:IrreflexiveProperty .
+:HasParent rdf:type owl:ObjectProperty ;
+           owl:inverseOf :IsParentOf ;
+           rdf:type owl:FunctionalProperty ,
+                    owl:IrreflexiveProperty .
 
 
 ###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/ЯвляетсяПотомком
-:ЯвляетсяПотомком rdf:type owl:ObjectProperty ;
-                  owl:inverseOf :ЯвляетсяПредком ;
-                  rdf:type owl:TransitiveProperty ,
-                           owl:IrreflexiveProperty .
+:IsDescendant rdf:type owl:ObjectProperty ;
+              owl:inverseOf :IsAncestor ;
+              rdf:type owl:TransitiveProperty ,
+                       owl:IrreflexiveProperty .
 
 
 ###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/ЯвляетсяПредком
-:ЯвляетсяПредком rdf:type owl:ObjectProperty ,
-                          owl:IrreflexiveProperty .
+:IsAncestor rdf:type owl:ObjectProperty ,
+                      owl:IrreflexiveProperty .
 
 
 ###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/ЯвляетсяРодителемДля
-:ЯвляетсяРодителемДля rdf:type owl:ObjectProperty .
+:IsParentOf rdf:type owl:ObjectProperty .
 
 
 #################################################################
@@ -48,61 +48,61 @@
 #################################################################
 
 ###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Человек
-:Человек rdf:type owl:Class .
+:Person rdf:type owl:Class .
 
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Андрей_Петров
-:Андрей_Петров rdf:type owl:NamedIndividual ,
-                        :Человек ;
-               :ИмеетРодителя :Леонид_Петров ;
-               :ЯвляетсяПотомком :Леонид_Петров ,
-                                 :Сергей_Петров .
+###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Andrew_Johnson
+:Andrew_Johnson rdf:type owl:NamedIndividual ,
+                         :Person ;
+                :HasParent :Leonard_Johnson ;
+                :IsDescendant :Leonard_Johnson ,
+                              :Samuel_Johnson .
 
 
-###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Вася_Иванов
-:Вася_Иванов rdf:type owl:NamedIndividual ,
-                      :Человек ;
-             :ИмеетРодителя :Игорь_Иванов ;
-             :ЯвляетсяПотомком :Игорь_Иванов ,
-                               :Петр_Иванов .
+###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/William_Smith
+:William_Smith rdf:type owl:NamedIndividual ,
+                        :Person ;
+               :HasParent :Eric_Smith ;
+               :IsDescendant :Eric_Smith ,
+                             :Peter_Smith .
 
 
-###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Игорь_Иванов
-:Игорь_Иванов rdf:type owl:NamedIndividual ,
-                       :Человек ;
-              :ИмеетРодителя :Петр_Иванов ;
-              :ЯвляетсяПотомком :Петр_Иванов ;
-              :ЯвляетсяПредком :Вася_Иванов ;
-              :ЯвляетсяРодителемДля :Вася_Иванов .
+###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Eric_Smith
+:Eric_Smith rdf:type owl:NamedIndividual ,
+                     :Person ;
+            :HasParent :Peter_Smith ;
+            :IsDescendant :Peter_Smith ;
+            :IsAncestor :William_Smith ;
+            :IsParentOf :William_Smith .
 
 
-###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Леонид_Петров
-:Леонид_Петров rdf:type owl:NamedIndividual ,
-                        :Человек ;
-               :ИмеетРодителя :Сергей_Петров ;
-               :ЯвляетсяПотомком :Сергей_Петров ;
-               :ЯвляетсяПредком :Андрей_Петров ;
-               :ЯвляетсяРодителемДля :Андрей_Петров .
+###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Leonard_Johnson
+:Leonard_Johnson rdf:type owl:NamedIndividual ,
+                          :Person ;
+                 :HasParent :Samuel_Johnson ;
+                 :IsDescendant :Samuel_Johnson ;
+                 :IsAncestor :Andrew_Johnson ;
+                 :IsParentOf :Andrew_Johnson .
 
 
-###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Петр_Иванов
-:Петр_Иванов rdf:type owl:NamedIndividual ,
-                      :Человек ;
-             :ЯвляетсяПредком :Вася_Иванов ,
-                              :Игорь_Иванов ;
-             :ЯвляетсяРодителемДля :Игорь_Иванов .
+###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Peter_Smith
+:Peter_Smith rdf:type owl:NamedIndividual ,
+                      :Person ;
+             :IsAncestor :William_Smith ,
+                         :Eric_Smith ;
+             :IsParentOf :Eric_Smith .
 
 
-###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Сергей_Петров
-:Сергей_Петров rdf:type owl:NamedIndividual ,
-                        :Человек ;
-               :ЯвляетсяПредком :Андрей_Петров ,
-                                :Леонид_Петров ;
-               :ЯвляетсяРодителемДля :Леонид_Петров .
+###  http://www.semanticweb.org/admin/ontologies/2025/9/untitled-ontology-25/Samuel_Johnson
+:Samuel_Johnson rdf:type owl:NamedIndividual ,
+                         :Person ;
+                :IsAncestor :Andrew_Johnson ,
+                            :Leonard_Johnson ;
+                :IsParentOf :Leonard_Johnson .
 
 
 #################################################################
@@ -119,7 +119,7 @@
    rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
    <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ИмеетРодителя ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :HasParent ;
                                                        <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                        <http://www.w3.org/2003/11/swrl#argument2> :y
                                                      ] ;
@@ -127,7 +127,7 @@
                                          ] ;
    <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ЯвляетсяПредком ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :IsAncestor ;
                                                        <http://www.w3.org/2003/11/swrl#argument1> :y ;
                                                        <http://www.w3.org/2003/11/swrl#argument2> :x
                                                      ] ;
